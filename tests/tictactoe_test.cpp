@@ -5,6 +5,21 @@
 
 #include "../src/tictactoe.hpp"
 
-TEST_CASE( ) {
-    REQUIRE(  );
+TEST_CASE("game starts with player X") {
+    tictactoe game;
+    REQUIRE(game.getPlayer() == 'X');
+}
+TEST_CASE("valid move is accepted") {
+    tictactoe game;
+    REQUIRE(game.validMove("1") == true);
+}
+TEST_CASE("taken spot is invalid") {
+    tictactoe game;
+    game.makeMove(1);
+    REQUIRE(game.validMove("1") == false);
+}
+TEST_CASE("switch player works") {
+    tictactoe game;
+    game.switchPlayer();
+    REQUIRE(game.getPlayer() == 'O');
 }
