@@ -88,6 +88,7 @@ if (currentPlayer == 'X') {
     }
 }
 void tictactoe::resetGame() {
+    board.clear();
 board.push_back("1");
     board.push_back("2");
     board.push_back("3");

@@ -23,3 +23,15 @@ TEST_CASE("switch player works") {
     game.switchPlayer();
     REQUIRE(game.getPlayer() == 'O');
 }
+TEST_CASE("reset game puts player back to X") {
+    tictactoe game;
+    game.switchPlayer();
+    game.resetGame();
+    REQUIRE(game.getPlayer() == 'X');
+}
+TEST_CASE("reset game clears taken spots") {
+    tictactoe game;
+    game.makeMove(1);
+    game.resetGame();
+    REQUIRE(game.validMove("1") == true);
+}
