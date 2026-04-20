@@ -71,10 +71,10 @@ int main() {
         while (true) {
             cout << "Would you like to play again (yes/no)? ";
             getline(cin, answer);
-            if (answer == "yes") {
+            if (answer == "yes" || answer == "y") {
                 break;
             }
-            else if (answer == "no") {
+            else if (answer == "no" || answer == "n") {
                 playAgain = false;
                 break;
             }
