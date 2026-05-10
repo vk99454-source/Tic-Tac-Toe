@@ -35,3 +35,46 @@ TEST_CASE("reset game clears taken spots") {
     game.resetGame();
     REQUIRE(game.validMove("1") == true);
 }
+TEST_CASE("trap is off by default") {
+    tictactoe game;
+    for (int i = 1; i <= 9; i++) {
+        REQUIRE(game.isTrap(i) == false);
+    }
+}
+TEST_CASE("enableTrap creates exactly one trap") {
+    tictactoe game;
+    game.enableTrap();
+    int trapCount = 0;
+    for (int i = 1; i <= 9; i++) {
+        if (game.isTrap(i) == true) {
+            trapCount++;
+        }
+    }
+    REQUIRE(trapCount == 1);
+}
+TEST_CASE("disableTrap turns trap off") {
+    tictactoe game;
+    game.enableTrap();
+    game.disableTrap();
+    for (int i = 1; i <= 9; i++) {
+        REQUIRE(game.isTrap(i) == false);
+    }
+}
+TEST_CASE("resetGame clears the trap") {
+    tictactoe game;
+    game.enableTrap();
+    game.resetGame();
+    for (int i = 1; i <= 9; i++) {
+        REQUIRE(game.isTrap(i) == false);
+    }
+}
+TEST_CASE("draw works when trap cell is left unmarked") {
+    tictactoe game;
+    game.enableTrap();
+    for (int i = 1; i <= 9; i++) {
+        if (game.isTrap(i) == false) {
+            game.makeMove(i);
+        }
+    }
+    REQUIRE(game.checkDraw() == true);
+}

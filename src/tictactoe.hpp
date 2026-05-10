@@ -13,7 +13,12 @@ class tictactoe {
     void switchPlayer();
     void resetGame();
     char getPlayer() const;
+    void enableTrap ();
+    void disableTrap ();
+    bool isTrap(int position) const;
 private:
     vector<string> board;
     char currentPlayer;
+    bool trapEnabled;
+    int trapPosition;
 };

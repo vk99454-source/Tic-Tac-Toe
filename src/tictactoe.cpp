@@ -1,5 +1,6 @@
 #include "tictactoe.hpp"
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 tictactoe::tictactoe() {
@@ -13,6 +14,8 @@ board.push_back("1");
     board.push_back("8");
     board.push_back("9");
     currentPlayer = 'X';
+    trapEnabled = false;
+    trapPosition = -1;
 }
 void tictactoe::printBoard() const {
 cout << endl;
@@ -73,6 +76,9 @@ bool tictactoe::checkWin() const {
 }
 bool tictactoe::checkDraw() const {
 for (int i = 0; i < board.size(); i++) {
+    if (trapEnabled == true && i + 1 == trapPosition) {
+        continue;
+    }
     if (board[i] != "X" && board[i] != "O") {
         return false;
     }
@@ -99,7 +105,23 @@ board.push_back("1");
     board.push_back("8");
     board.push_back("9");
     currentPlayer = 'X';
+    trapEnabled = false;
+    trapPosition = -1;
 }
 char tictactoe::getPlayer() const {
 return currentPlayer;
+}
+void tictactoe::enableTrap() {
+    trapEnabled = true;
+    trapPosition = rand() % 9 + 1;
+}
+void tictactoe::disableTrap() {
+    trapEnabled = false;
+    trapPosition = -1;
+}
+bool tictactoe::isTrap(int position) const {
+    if (trapEnabled == true && position == trapPosition) {
+        return true;
+    }
+    return false;
 }
