@@ -78,3 +78,48 @@ TEST_CASE("draw works when trap cell is left unmarked") {
     }
     REQUIRE(game.checkDraw() == true);
 }
+TEST_CASE("computer chooses first spot on empty board") {
+    tictactoe game;
+    REQUIRE(game.firstAvailableSpot() == 1);
+}
+
+TEST_CASE("computer skips taken spot and chooses next open one") {
+    tictactoe game;
+    game.makeMove(1);
+    REQUIRE(game.firstAvailableSpot() == 2);
+}
+
+TEST_CASE("computer chooses next available spot after multiple moves") {
+    tictactoe game;
+    game.makeMove(1);
+    game.switchPlayer();
+    game.makeMove(2);
+    game.switchPlayer();
+    game.makeMove(3);
+
+    REQUIRE(game.firstAvailableSpot() == 4);
+}
+
+TEST_CASE("computer returns -1 when board is full") {
+    tictactoe game;
+
+    game.makeMove(1);
+    game.switchPlayer();
+    game.makeMove(2);
+    game.switchPlayer();
+    game.makeMove(3);
+    game.switchPlayer();
+    game.makeMove(4);
+    game.switchPlayer();
+    game.makeMove(5);
+    game.switchPlayer();
+    game.makeMove(6);
+    game.switchPlayer();
+    game.makeMove(7);
+    game.switchPlayer();
+    game.makeMove(8);
+    game.switchPlayer();
+    game.makeMove(9);
+
+    REQUIRE(game.firstAvailableSpot() == -1);
+}

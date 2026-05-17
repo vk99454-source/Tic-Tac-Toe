@@ -125,3 +125,12 @@ bool tictactoe::isTrap(int position) const {
     }
     return false;
 }
+int tictactoe::firstAvailableSpot() const {
+    for (int i = 0; i < board.size(); i++) {
+        if (board[i] != "X" && board[i] != "O") {
+            return i + 1;
+        }
+    }
+
+    return -1;
+}

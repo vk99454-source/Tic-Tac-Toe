@@ -16,6 +16,7 @@ class tictactoe {
     void enableTrap ();
     void disableTrap ();
     bool isTrap(int position) const;
+    int firstAvailableSpot() const;
 private:
     vector<string> board;
     char currentPlayer;

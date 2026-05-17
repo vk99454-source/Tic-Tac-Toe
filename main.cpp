@@ -52,19 +52,16 @@ int main() {
         game.printBoard();
         while (true) {
             if ((mode == "2" && game.getPlayer() == 'O') || (mode == "3" && game.getPlayer() == 'X')) {
-                for (int i = 1; i <= 9; i++) {
-                    string computerMove = to_string(i);
-                    if (game.validMove(computerMove) == true) {
-                        cout << "Computer chooses " << i << endl;
-                        if (game.isTrap(i) == true) {
-                            cout << "Oh no! " << game.getPlayer() << " set off the trap and loses their turn." << endl;
-                            game.printBoard();
-                        }
-                        else {
-                            game.makeMove(i);
-                            game.printBoard();
-                        }
-                        break;
+                int spot = game.firstAvailableSpot();
+                if (spot != -1) {
+                    cout << "Computer chooses " << spot << endl;
+                    if (game.isTrap(spot) == true) {
+                        cout << "Oh no! " << game.getPlayer() << " set off the trap and loses their turn." << endl;
+                        game.printBoard();
+                    }
+                    else {
+                        game.makeMove(spot);
+                        game.printBoard();
                     }
                 }
                     if (game.checkWin() == true) {
